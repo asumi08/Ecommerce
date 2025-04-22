@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBuild - Your PC Parts Destination</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">TechBuild</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#products">Components</a></li>
+                <li><a href="#pc-builder">PC Builder</a></li>
+                <li><a href="#deals">Deals</a></li>
+                <li><a href="#" class="cart-icon" id="cart-icon">
+                    Cart <span class="cart-count">0</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Build Your Dream PC</h1>
+        <p>High-quality components at competitive prices. From gaming beasts to productivity powerhouses, we've got you covered.</p>
+        <a href="#products" class="btn btn-primary">Browse Components</a>
+    </section>
+
+    <section class="pc-builder-banner" id="pc-builder">
+        <h2>Use Our PC Builder Tool</h2>
+        <p>Interactive component selection with real-time compatibility checking and performance metrics.</p>
+        <a href="#" class="btn btn-secondary">Start Building</a>
+    </section>
+
+    <section class="products" id="products">
+        <h2 class="section-title">PC Components</h2>
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="cpu">CPUs</button>
+            <button class="category-btn" data-category="gpu">GPUs</button>
+            <button class="category-btn" data-category="motherboard">Motherboards</button>
+            <button class="category-btn" data-category="ram">RAM</button>
+            <button class="category-btn" data-category="storage">Storage</button>
+        </div>
+        <div class="product-grid" id="product-grid">
+        </div>
+    </section>
+
+    <section class="compatibility-checker">
+        <div class="compatibility-card">
+            <h3>PC Part Compatibility Checker</h3>
+            <p>Not sure if components will work together? Use our compatibility tool to check before you buy.</p>
+            <a href="#" class="btn btn-primary">Check Compatibility</a>
+        </div>
+    </section>
+
+    <section class="deals" id="deals">
+        <h2 class="section-title">Hot Deals</h2>
+        <div class="deals-banner">
+            <h3>Flash Sale! Up to 30% off on Selected GPUs</h3>
+            <p>Limited time offer. Don't miss out!</p>
+            <div class="countdown" id="countdown">23:59:59</div>
+            <a href="#" class="btn btn-secondary">View Deals</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Why Choose TechBuild</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <div class="feature-icon">🔧</div>
+                <h3>Expert Tech Support</h3>
+                <p>Free consultation and support for your build</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Shipping</h3>
+                <p>Next-day delivery available on most items</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">💰</div>
+                <h3>Price Match</h3>
+                <p>Found it cheaper? We'll match the price</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🔒</div>
+                <h3>Extended Warranty</h3>
+                <p>Peace of mind with our extended coverage</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>TechBuild</h3>
+                <p>Your trusted source for PC components since 2015. Quality parts, expert advice, and competitive prices.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Components</a></li>
+                    <li><a href="#pc-builder">PC Builder</a></li>
+                    <li><a href="#deals">Deals</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="#">CPUs</a></li>
+                    <li><a href="#">GPUs</a></li>
+                    <li><a href="#">Motherboards</a></li>
+                    <li><a href="#">RAM</a></li>
+                    <li><a href="#">Storage</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>123 Tech Street, PC City</li>
+                    <li>Phone: (123) 456-7890</li>
+                    <li>Email: support@techbuild.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 TechBuild. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <div class="cart-items" id="cart-items">
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
