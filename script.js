@@ -2,7 +2,7 @@ const products = [
     {
         id: 1,
         name: "AMD Ryzen 7 7800X3D",
-        price: 449.99,
+        price: 17024,
         image: "/api/placeholder/400/320",
         category: "cpu",
         specs: "8-Core, 16-Thread, Up to 5.0GHz"
@@ -10,7 +10,7 @@ const products = [
     {
         id: 2,
         name: "Intel Core i9-14900K",
-        price: 589.99,
+        price: 33039.44,
         image: "/api/placeholder/400/320",
         category: "cpu",
         specs: "24-Core (8P+16E), 32-Thread, Up to 6.0GHz"
@@ -18,7 +18,7 @@ const products = [
     {
         id: 3,
         name: "NVIDIA RTX 4080 SUPER",
-        price: 999.99,
+        price: 55999.44,
         image: "/api/placeholder/400/320",
         category: "gpu",
         specs: "16GB GDDR6X, 10240 CUDA Cores"
@@ -26,7 +26,7 @@ const products = [
     {
         id: 4,
         name: "AMD Radeon RX 7900 XTX",
-        price: 949.99,
+        price: 53199.44,
         image: "/api/placeholder/400/320",
         category: "gpu",
         specs: "24GB GDDR6, 12288 Stream Processors"
@@ -34,7 +34,7 @@ const products = [
     {
         id: 5,
         name: "ASUS ROG Strix X670E-E Gaming",
-        price: 429.99,
+        price: 24079.44,
         image: "/api/placeholder/400/320",
         category: "motherboard",
         specs: "AMD AM5, DDR5, PCIe 5.0, ATX"
@@ -42,7 +42,7 @@ const products = [
     {
         id: 6,
         name: "MSI MPG Z790 EDGE WIFI",
-        price: 379.99,
+        price: 21279.44,
         image: "/api/placeholder/400/320",
         category: "motherboard",
         specs: "Intel LGA 1700, DDR5, PCIe 5.0, ATX"
@@ -50,7 +50,7 @@ const products = [
     {
         id: 7,
         name: "G.SKILL Trident Z5 RGB 32GB",
-        price: 159.99,
+        price: 8959.44,
         image: "/api/placeholder/400/320",
         category: "ram",
         specs: "DDR5-6000MHz, CL36, 2x16GB Kit"
@@ -58,7 +58,7 @@ const products = [
     {
         id: 8,
         name: "Corsair Vengeance RGB 64GB",
-        price: 219.99,
+        price: 12319.44,
         image: "/api/placeholder/400/320",
         category: "ram",
         specs: "DDR5-5600MHz, CL40, 2x32GB Kit"
@@ -66,7 +66,7 @@ const products = [
     {
         id: 9,
         name: "Samsung 990 PRO 2TB",
-        price: 199.99,
+        price: 11199.44,
         image: "/api/placeholder/400/320",
         category: "storage",
         specs: "M.2 NVMe SSD, PCIe 4.0, 7450MB/s Read"
@@ -74,7 +74,7 @@ const products = [
     {
         id: 10,
         name: "WD Black SN850X 1TB",
-        price: 129.99,
+        price: 7279.44,
         image: "/api/placeholder/400/320",
         category: "storage",
         specs: "M.2 NVMe SSD, PCIe 4.0, 7300MB/s Read"
@@ -110,7 +110,7 @@ function displayProducts(category = 'all') {
             <div class="product-info">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-specs">${product.specs}</p>
-                <p class="product-price">$${product.price.toFixed(2)}</p>
+                <p class="product-price">₱${product.price.toLocaleString('en-PH')}</p>
                 <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
             </div>
         `;
@@ -122,14 +122,6 @@ function displayProducts(category = 'all') {
         btn.addEventListener('click', handleAddToCart);
     });
 }
-
-categoryBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        categoryBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        displayProducts(btn.dataset.category);
-    });
-});
 
 function handleAddToCart(e) {
     const productId = parseInt(e.target.dataset.id);
@@ -166,7 +158,7 @@ function updateCartUI() {
                 <div class="cart-item-info">
                     <h4 class="cart-item-title">${item.name}</h4>
                     <p class="cart-item-specs">${item.specs}</p>
-                    <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                    <p class="cart-item-price">₱${item.price.toLocaleString('en-PH')}</p>
                     <div class="cart-item-quantity">
                         <button class="quantity-btn minus" data-id="${item.id}">-</button>
                         <input type="text" class="quantity-input" value="${item.quantity}" readonly>
@@ -202,7 +194,7 @@ function updateCartUI() {
     }
     
     const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    cartTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
+    cartTotalPrice.textContent = `₱${totalPrice.toLocaleString('en-PH')}`;
 }
 
 function updateQuantity(productId, change) {
