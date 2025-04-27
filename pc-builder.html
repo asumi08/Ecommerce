@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Builder - TechnoBuilders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00aeff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links li a {
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #00aeff;
+        }
+
+        .active {
+            color: #00aeff;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff5a5f;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #121212 0%, #2d3436 100%);
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00aeff;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #00aeff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0097e0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #00aeff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+
+        .pc-builder-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .builder-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .component-selector {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .component-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            gap: 1rem;
+        }
+
+        .component-type {
+            font-weight: 600;
+        }
+
+        .component-select {
+            position: relative;
+        }
+
+        .component-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #f1f5f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .component-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .component-price {
+            color: #00aeff;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .build-summary {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #00aeff;
+        }
+
+        .summary-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #00aeff;
+        }
+
+        .compatibility-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .compatibility-pass {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .compatibility-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .compatibility-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .component-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #00aeff;
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .modal-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-item:hover {
+            border-color: #00aeff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .modal-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-item-specs {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-item-price {
+            color: #00aeff;
+            font-weight: 600;
+        }
+
+        .performance-metrics {
+            margin-top: 2rem;
+        }
+
+        .meter-container {
+            margin-bottom: 1rem;
+        }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .meter-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background-color: #00aeff;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 3rem 5%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #00aeff;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: #00aeff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #00aeff;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">TechnoBuilders</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">All Components</a></li>
+                <li><a href="pc-builder.html" class="active">PC Builder</a></li>
+                <li><a href="cart.html" class="cart-icon" id="cart-icon">
+                    Cart <span class="cart-count">0</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>PC Builder Tool</h1>
+        <p>Build your custom PC with our interactive component selector. We'll check compatibility and estimate performance in real-time.</p>
+    </section>
+
+    <div class="pc-builder-container">
+        <div class="builder-grid">
+            <div class="component-selector">
+                <h2 style="margin-bottom: 1.5rem; color: #00aeff;">Select Your Components</h2>
+                
+                <div class="component-row">
+                    <div class="component-type">CPU</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="cpu">Select CPU</button>
+                    </div>
+                    <div class="component-price" id="cpu-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">Motherboard</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="motherboard">Select Motherboard</button>
+                    </div>
+                    <div class="component-price" id="motherboard-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">GPU</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="gpu">Select GPU</button>
+                    </div>
+                    <div class="component-price" id="gpu-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">RAM</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="ram">Select RAM</button>
+                    </div>
+                    <div class="component-price" id="ram-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">Storage</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="storage">Select Storage</button>
+                    </div>
+                    <div class="component-price" id="storage-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">Power Supply</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="psu">Select Power Supply</button>
+                    </div>
+                    <div class="component-price" id="psu-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">Case</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="case">Select Case</button>
+                    </div>
+                    <div class="component-price" id="case-price">₱0.00</div>
+                </div>
+                
+                <div class="component-row">
+                    <div class="component-type">CPU Cooler</div>
+                    <div class="component-select">
+                        <button class="component-btn" data-component="cooler">Select CPU Cooler</button>
+                    </div>
+                    <div class="component-price" id="cooler-price">₱0.00</div>
+                </div>
+            </div>
+            
+            <div class="build-summary">
+                <h3 class="summary-title">Build Summary</h3>
+                <div class="summary-items" id="summary-items">
+                    <div class="summary-item">
+                        <div>No components selected</div>
+                        <div>₱0.00</div>
+                    </div>
+                </div>
+                
+                <div class="summary-total">
+                    <div>Total</div>
+                    <div id="total-price">₱0.00</div>
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" id="add-to-cart-btn">Add All To Cart</button>
+                
+                <div class="compatibility-info compatibility-pass" id="compatibility-info">
+                    <p><strong>Compatibility:</strong> Start selecting components to check compatibility</p>
+                </div>
+                
+                <div class="performance-metrics">
+                    <h3 style="margin-bottom: 1rem;">Estimated Performance</h3>
+                    
+                    <div class="meter-container">
+                        <div class="meter-label">
+                            <span>Gaming</span>
+                            <span id="gaming-score">0/100</span>
+                        </div>
+                        <div class="meter-bar">
+                            <div class="meter-fill" id="gaming-meter" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="meter-container">
+                        <div class="meter-label">
+                            <span>Productivity</span>
+                            <span id="productivity-score">0/100</span>
+                        </div>
+                        <div class="meter-bar">
+                            <div class="meter-fill" id="productivity-meter" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="meter-container">
+                        <div class="meter-label">
+                            <span>Content Creation</span>
+                            <span id="content-score">0/100</span>
+                        </div>
+                        <div class="meter-bar">
+                            <div class="meter-fill" id="content-meter" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Component selection modals -->
+    <div class="component-modal" id="cpu-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select CPU</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="cpu-items">
+                <!-- CPU items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="motherboard-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select Motherboard</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="motherboard-items">
+                <!-- Motherboard items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="gpu-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select GPU</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="gpu-items">
+                <!-- GPU items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="ram-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select RAM</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="ram-items">
+                <!-- RAM items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="storage-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select Storage</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="storage-items">
+                <!-- Storage items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="psu-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select Power Supply</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="psu-items">
+                <!-- PSU items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="case-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select Case</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="case-items">
+                <!-- Case items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="component-modal" id="cooler-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select CPU Cooler</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-items" id="cooler-items">
+                <!-- Cooler items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>TechnoBuilders</h3>
+                <p>Your trusted source for PC components since 2015. Quality parts, expert advice, and competitive prices.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">All Components</a></li>
+                    <li><a href="pc-builder.html">PC Builder</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="cpus.html">CPUs</a></li>
+                    <li><a href="gpus.html">GPUs</a></li>
+                    <li><a href="motherboards.html">Motherboards</a></li>
+                    <li><a href="storage.html">Storage</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Governors Drive Manggahan, General Trias City, Cavite, 4107</li>
+                    <li>Phone: (043) 322 5182</li>
+                    <li>Email: support@technobuilders.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 TechnoBuilders. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Component data
+        const components = {
+            cpu: [
+                { id: 101, name: "AMD Ryzen 7 7800X3D", price: 17024, specs: "8-Core, 16-Thread, Up to 5.0GHz", socket: "AM5", tdp: 120 },
+                { id: 102, name: "AMD Ryzen 5 7600X", price: 11799, specs: "6-Core, 12-Thread, Up to 5.3GHz", socket: "AM5", tdp: 105 },
+                { id: 103, name: "Intel Core i9-14900K", price: 28999, specs: "24-Core (8P+16E), 32-Thread, Up to 6.0GHz", socket: "LGA1700", tdp: 125 },
+                { id: 104, name: "Intel Core i5-14600K", price: 15999, specs: "14-Core (6P+8E), 20-Thread, Up to 5.3GHz", socket: "LGA1700", tdp: 125 }
+            ],
+            motherboard: [
+                { id: 201, name: "ASUS ROG Strix X670E-E Gaming", price: 24079.44, specs: "AMD AM5, DDR5, PCIe 5.0, ATX", socket: "AM5", form: "ATX" },
+                { id: 202, name: "MSI MPG B650 CARBON WIFI", price: 15499, specs: "AMD AM5, DDR5, PCIe 4.0, ATX", socket: "AM5", form: "ATX" },
+                { id: 203, name: "ASUS ROG Maximus Z790 Hero", price: 29999, specs: "Intel LGA1700, DDR5, PCIe 5.0, ATX", socket: "LGA1700", form: "ATX" },
+                { id: 204, name: "MSI MAG B760M MORTAR WIFI", price: 9999, specs: "Intel LGA1700, DDR4, PCIe 4.0, mATX", socket: "LGA1700", form: "mATX" }
+            ],
+            gpu: [
+                { id: 301, name: "NVIDIA RTX 4080 SUPER", price: 55999.44, specs: "16GB GDDR6X, 10240 CUDA Cores", power: 320, length: 304 },
+                { id: 302, name: "NVIDIA RTX 4070 Ti SUPER", price: 41999, specs: "16GB GDDR6X, 8448 CUDA Cores", power: 285, length: 285 },
+                { id: 303, name: "AMD Radeon RX 7900 XTX", price: 49999, specs: "24GB GDDR6, 96 Compute Units", power: 355, length: 287 },
+                { id: 304, name: "AMD Radeon RX 7800 XT", price: 31999, specs: "16GB GDDR6, 60 Compute Units", power: 263, length: 267 }
+            ],
+            ram: [
+                { id: 401, name: "Corsair Vengeance RGB DDR5-6000", price: 8999, specs: "32GB (2x16GB), CL36", type: "DDR5" },
+                { id: 402, name: "G.Skill Trident Z5 RGB", price: 7499, specs: "32GB (2x16GB), DDR5-6400, CL32", type: "DDR5" },
+                { id: 403, name: "Kingston Fury Beast", price: 4999, specs: "32GB (2x16GB), DDR4-3600, CL18", type: "DDR4" },
+                { id: 404, name: "Crucial Ballistix", price: 3899, specs: "16GB (2x8GB), DDR4-3200, CL16", type: "DDR4" }
+            ],
+            storage: [
+                { id: 501, name: "Samsung 990 PRO 2TB", price: 11199.44, specs: "M.2 NVMe SSD, PCIe 4.0, 7450MB/s Read" },
+                { id: 502, name: "WD Black SN850X 1TB", price: 7999, specs: "M.2 NVMe SSD, PCIe 4.0, 7300MB/s Read" },
+                { id: 503, name: "Samsung 870 EVO 2TB", price: 8499, specs: "SATA SSD, 560MB/s Read" },
+                { id: 504, name: "Seagate Barracuda 4TB", price: 4999, specs: "HDD, 5400RPM, 256MB Cache" }
+            ],
+            psu: [
+                { id: 601, name: "Corsair RM850x", price: 7499, specs: "850W, 80+ Gold, Fully Modular", watts: 850 },
+                { id: 602, name: "EVGA SuperNOVA 750 G5", price: 5999, specs: "750W, 80+ Gold, Fully Modular", watts: 750 },
+                { id: 603, name: "Seasonic FOCUS GX-650", price: 4999, specs: "650W, 80+ Gold, Fully Modular", watts: 650 },
+                { id: 604, name: "Thermaltake Toughpower GF 1000W", price: 9999, specs: "1000W, 80+ Gold, Fully Modular", watts: 1000 }
+            ],
+            case: [
+                { id: 701, name: "Lian Li PC-O11 Dynamic", price: 6999, specs: "Mid Tower, Tempered Glass, E-ATX Support", form: ["ATX", "mATX", "ITX", "E-ATX"], max_gpu: 420 },
+                { id: 702, name: "Corsair 4000D Airflow", price: 4999, specs: "Mid Tower, Mesh Front Panel, ATX", form: ["ATX", "mATX", "ITX"], max_gpu: 360 },
+                { id: 703, name: "NZXT H510 Flow", price: 3999, specs: "Mid Tower, Perforated Front, ATX", form: ["ATX", "mATX", "ITX"], max_gpu: 360 },
+                { id: 704, name: "Fractal Design Meshify 2", price: 7499, specs: "Mid Tower, High-Airflow, E-ATX Support", form: ["ATX", "mATX", "ITX", "E-ATX"], max_gpu: 467 }
+            ],
+            cooler: [
+                { id: 801, name: "Noctua NH-D15", price: 5999, specs: "Dual Tower, 2x 140mm Fans, Air Cooler", socket: ["AM4", "AM5", "LGA1700", "LGA1200"] },
+                { id: 802, name: "Corsair iCUE H150i ELITE CAPELLIX", price: 9999, specs: "360mm AIO, RGB Pump & Fans", socket: ["AM4", "AM5", "LGA1700", "LGA1200"] },
+                { id: 803, name: "be quiet! Dark Rock Pro 4", price: 4999, specs: "Dual Tower, Silent Wings Fan, Air Cooler", socket: ["AM4", "AM5", "LGA1700", "LGA1200"] },
+                { id: 804, name: "ARCTIC Liquid Freezer II 240", price: 5499, specs: "240mm AIO, VRM Fan, High Efficiency", socket: ["AM4", "AM5", "LGA1700", "LGA1200"] }
+            ]
+        };
+
+        // Selected components
+        let selectedComponents = {
+            cpu: null,
+            motherboard: null,
+            gpu: null,
+            ram: null,
+            storage: null,
+            psu: null,
+            case: null,
+            cooler: null
+        };
+
+        // Cart data
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = totalItems;
+        }
+
+        // Initialize component selection buttons
+        function initComponentButtons() {
+            const componentBtns = document.querySelectorAll('.component-btn');
+            componentBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const componentType = this.dataset.component;
+                    openComponentModal(componentType);
+                });
+            });
+        }
+
+        // Open component selection modal
+        function openComponentModal(componentType) {
+            const modal = document.getElementById(`${componentType}-modal`);
+            modal.style.display = 'block';
+            
+            // Load component items
+            loadComponentItems(componentType);
+            
+            // Close modal when clicking X
+            const closeBtn = modal.querySelector('.close-modal');
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Load component items into modal
+        function loadComponentItems(componentType) {
+            const itemsContainer = document.getElementById(`${componentType}-items`);
+            itemsContainer.innerHTML = '';
+            
+            components[componentType].forEach(component => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'modal-item';
+                itemElement.dataset.id = component.id;
+                
+                itemElement.innerHTML = `
+                    <div class="modal-item-title">${component.name}</div>
+                    <div class="modal-item-specs">${component.specs}</div>
+                    <div class="modal-item-price">₱${component.price.toLocaleString('en-PH')}</div>
+                `;
+                
+                itemElement.addEventListener('click', function() {
+                    selectComponent(componentType, component);
+                    document.getElementById(`${componentType}-modal`).style.display = 'none';
+                });
+                
+                itemsContainer.appendChild(itemElement);
+            });
+        }
+
+        // Select a component
+        function selectComponent(type, component) {
+            selectedComponents[type] = component;
+            document.querySelector(`.component-btn[data-component="${type}"]`).textContent = component.name;
+            document.getElementById(`${type}-price`).textContent = `₱${component.price.toLocaleString('en-PH')}`;
+            
+            updateBuildSummary();
+            checkCompatibility();
+            updatePerformanceMetrics();
+        }
+
+        // Update build summary
+        function updateBuildSummary() {
+            const summaryContainer = document.getElementById('summary-items');
+            summaryContainer.innerHTML = '';
+            
+            let totalPrice = 0;
+            let hasComponents = false;
+            
+            for (const [type, component] of Object.entries(selectedComponents)) {
+                if (component) {
+                    hasComponents = true;
+                    totalPrice += component.price;
+                    
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'summary-item';
+                    itemElement.innerHTML = `
+                        <div>${component.name}</div>
+                        <div>₱${component.price.toLocaleString('en-PH')}</div>
+                    `;
+                    
+                    summaryContainer.appendChild(itemElement);
+                }
+            }
+            
+            if (!hasComponents) {
+                const noComponentsElement = document.createElement('div');
+                noComponentsElement.className = 'summary-item';
+                noComponentsElement.innerHTML = `
+                    <div>No components selected</div>
+                    <div>₱0.00</div>
+                `;
+                summaryContainer.appendChild(noComponentsElement);
+            }
+            
+            document.getElementById('total-price').textContent = `₱${totalPrice.toLocaleString('en-PH')}`;
+        }
+
+        // Check compatibility
+        function checkCompatibility() {
+            const infoContainer = document.getElementById('compatibility-info');
+            let issues = [];
+            
+            // Reset class
+            infoContainer.className = 'compatibility-info';
+            
+            const { cpu, motherboard, gpu, ram, psu, case: pcCase } = selectedComponents;
+            
+            // CPU and Motherboard socket compatibility
+            if (cpu && motherboard) {
+                if (cpu.socket !== motherboard.socket) {
+                    issues.push(`CPU socket (${cpu.socket}) is not compatible with motherboard socket (${motherboard.socket})`);
+                }
+            }
+            
+            // RAM and Motherboard compatibility
+            if (ram && motherboard) {
+                const motherboardDDRType = motherboard.specs.includes('DDR5') ? 'DDR5' : 'DDR4';
+                if (ram.type !== motherboardDDRType) {
+                    issues.push(`RAM type (${ram.type}) is not compatible with motherboard (${motherboardDDRType})`);
+                }
+            }
+            
+            // Case and Motherboard form factor
+            if (pcCase && motherboard) {
+                if (!pcCase.form.includes(motherboard.form)) {
+                    issues.push(`Motherboard form factor (${motherboard.form}) not supported by case`);
+                }
+            }
+            
+            // GPU length and case
+            if (gpu && pcCase) {
+                if (gpu.length > pcCase.max_gpu) {
+                    issues.push(`GPU length (${gpu.length}mm) exceeds case maximum (${pcCase.max_gpu}mm)`);
+                }
+            }
+            
+            // Power supply wattage check
+            if (psu && cpu && gpu) {
+                const estimatedWattage = cpu.tdp + gpu.power + 150; // Adding 150W for other components
+                if (psu.watts < estimatedWattage) {
+                    issues.push(`Power supply (${psu.watts}W) may be insufficient for estimated system power (${estimatedWattage}W)`);
+                }
+            }
+            
+            // CPU Cooler compatibility
+            if (selectedComponents.cooler && cpu) {
+                if (!selectedComponents.cooler.socket.includes(cpu.socket)) {
+                    issues.push(`CPU cooler not compatible with CPU socket (${cpu.socket})`);
+                }
+            }
+            
+            // Update compatibility info
+            if (issues.length === 0) {
+                if (Object.values(selectedComponents).some(comp => comp !== null)) {
+                    infoContainer.classList.add('compatibility-pass');
+                    infoContainer.innerHTML = '<p><strong>Compatibility:</strong> All components are compatible</p>';
+                } else {
+                    infoContainer.classList.add('compatibility-pass');
+                    infoContainer.innerHTML = '<p><strong>Compatibility:</strong> Start selecting components to check compatibility</p>';
+                }
+            } else if (issues.length === 1) {
+                infoContainer.classList.add('compatibility-warning');
+                infoContainer.innerHTML = `<p><strong>Compatibility Warning:</strong> ${issues[0]}</p>`;
+            } else {
+                infoContainer.classList.add('compatibility-error');
+                infoContainer.innerHTML = `
+                    <p><strong>Compatibility Issues:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        ${issues.map(issue => `<li>${issue}</li>`).join('')}
+                    </ul>
+                `;
+            }
+        }
+
+        // Update performance metrics
+        function updatePerformanceMetrics() {
+            const { cpu, gpu, ram, storage } = selectedComponents;
+            
+            let gamingScore = 0;
+            let productivityScore = 0;
+            let contentScore = 0;
+            
+            // Calculate scores based on selected components
+            if (cpu) {
+                // Simple scoring based on price as a proxy for performance
+                const cpuScore = (cpu.price / 30000) * 50; // Max 50 points for CPU
+                
+                gamingScore += cpuScore * 0.4;
+                productivityScore += cpuScore * 0.6;
+                contentScore += cpuScore * 0.5;
+            }
+            
+            if (gpu) {
+                // Simple scoring based on price as a proxy for performance
+                const gpuScore = (gpu.price / 60000) * 50; // Max 50 points for GPU
+                
+                gamingScore += gpuScore * 0.6;
+                productivityScore += gpuScore * 0.2;
+                contentScore += gpuScore * 0.5;
+            }
+            
+            if (ram) {
+                // Simple scoring based on type and specs
+                const ramScore = ram.type === 'DDR5' ? 10 : 5;
+                const capacityScore = ram.specs.includes('32GB') ? 10 : ram.specs.includes('16GB') ? 5 : 2;
+                
+                gamingScore += (ramScore + capacityScore) * 0.8;
+                productivityScore += (ramScore + capacityScore) * 0.9;
+                contentScore += (ramScore + capacityScore) * 0.8;
+            }
+            
+            if (storage) {
+                // Simple scoring based on specs
+                let storageScore = 0;
+                if (storage.specs.includes('NVMe')) {
+                    storageScore = storage.specs.includes('PCIe 4.0') ? 15 : 10;
+                } else if (storage.specs.includes('SSD')) {
+                    storageScore = 7;
+                } else {
+                    storageScore = 3;
+                }
+                
+                gamingScore += storageScore * 0.5;
+                productivityScore += storageScore * 0.7;
+                contentScore += storageScore * 0.6;
+            }
+            
+            // Update the UI
+            document.getElementById('gaming-score').textContent = `${Math.round(gamingScore)}/100`;
+            document.getElementById('gaming-meter').style.width = `${gamingScore}%`;
+            
+            document.getElementById('productivity-score').textContent = `${Math.round(productivityScore)}/100`;
+            document.getElementById('productivity-meter').style.width = `${productivityScore}%`;
+            
+            document.getElementById('content-score').textContent = `${Math.round(contentScore)}/100`;
+            document.getElementById('content-meter').style.width = `${contentScore}%`;
+        }
+
+        // Add all selected components to cart
+        function addAllToCart() {
+            let hasComponents = false;
+            
+            for (const [type, component] of Object.entries(selectedComponents)) {
+                if (component) {
+                    hasComponents = true;
+                    
+                    const existingItem = cart.find(item => item.id === component.id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            ...component,
+                            quantity: 1,
+                            type: type
+                        });
+                    }
+                }
+            }
+            
+            if (hasComponents) {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                alert('All components added to cart!');
+            } else {
+                alert('Please select at least one component to add to cart.');
+            }
+        }
+
+        // Initialize the page
+        function initPage() {
+            initComponentButtons();
+            updateBuildSummary();
+            updateCartCount();
+            
+            // Add to cart button
+            document.getElementById('add-to-cart-btn').addEventListener('click', addAllToCart);
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

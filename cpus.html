@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechnoBuilders - Your PC Parts Destination</title>
+    <title>CPUs - TechnoBuilders</title>
     <style>
         * {
             margin: 0;
@@ -87,122 +87,81 @@
             font-size: 0.75rem;
         }
 
-        .hero {
+        .page-header {
             background: linear-gradient(135deg, #121212 0%, #2d3436 100%);
             color: white;
-            padding: 4rem 5%;
+            padding: 3rem 5%;
             text-align: center;
         }
 
-        .hero h1 {
+        .page-header h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: #00aeff;
         }
 
-        .hero p {
+        .page-header p {
             font-size: 1.1rem;
             max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: #00aeff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0097e0;
-            transform: translateY(-2px);
-        }
-
-        .pc-builder-banner {
-            background-color: #00aeff;
-            color: white;
-            padding: 2rem 5%;
-            text-align: center;
             margin: 0 auto;
         }
 
-        .pc-builder-banner h2 {
-            margin-bottom: 1rem;
+        .cpu-info {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
         }
 
-        .btn-secondary {
+        .brands {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .brand {
             background-color: white;
-            color: #00aeff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        .btn-secondary:hover {
-            background-color: #f1f1f1;
-            transform: translateY(-2px);
+        .brand:hover {
+            transform: translateY(-5px);
+        }
+
+        .brand-logo {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .amd-logo {
+            color: #ED1C24;
+        }
+
+        .intel-logo {
+            color: #0071C5;
+        }
+
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2rem;
-            padding-top: 2rem;
-        }
-
-        .features {
-            background-color: #f1f5f9;
-            padding: 4rem 5%;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-box {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #00aeff;
-            margin-bottom: 1rem;
-        }
-
-        .deals {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 5%;
-        }
-
-        .deals-banner {
-            background: linear-gradient(135deg, #00aeff 0%, #0076a3 100%);
-            border-radius: 8px;
-            padding: 2rem;
-            color: white;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .countdown {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 1rem 0;
-        }
-
-        .featured-products {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 5%;
         }
 
         .product-grid {
@@ -276,6 +235,38 @@
             background-color: #0097e0;
         }
 
+        .cpu-guide {
+            background-color: #f1f5f9;
+            padding: 3rem 5%;
+            margin: 3rem 0;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .guide-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .guide-content h3 {
+            margin-bottom: 1rem;
+            color: #00aeff;
+        }
+
+        .guide-content p {
+            margin-bottom: 1rem;
+        }
+
+        .guide-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
         footer {
             background-color: #1a1a1a;
             color: white;
@@ -336,25 +327,6 @@
             border-top: 1px solid #333;
         }
 
-        .compatibility-checker {
-            margin: 3rem auto;
-            max-width: 1200px;
-            padding: 0 5%;
-        }
-
-        .compatibility-card {
-            background-color: #f8f9fa;
-            border: 2px solid #00aeff;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .compatibility-card h3 {
-            color: #00aeff;
-            margin-bottom: 1rem;
-        }
-
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -371,12 +343,13 @@
                 margin-left: 0;
             }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
-
             .product-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .brands {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -386,7 +359,7 @@
         <nav class="navbar">
             <div class="logo">TechnoBuilders</div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">All Components</a></li>
                 <li><a href="pc-builder.html">PC Builder</a></li>
                 <li><a href="cart.html" class="cart-icon" id="cart-icon">
@@ -396,68 +369,47 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>Build Your Dream PC</h1>
-        <p>High-quality components at competitive prices. From gaming beasts to productivity powerhouses, we've got you covered.</p>
-        <a href="products.html" class="btn btn-primary">Browse Components</a>
+    <section class="page-header">
+        <h1>CPUs (Processors)</h1>
+        <p>The brain of your computer - choose the right processor for your computing needs</p>
     </section>
 
-    <section class="pc-builder-banner">
-        <h2>Use Our PC Builder Tool</h2>
-        <p>Interactive component selection with real-time compatibility checking and performance metrics.</p>
-        <a href="pc-builder.html" class="btn btn-secondary">Start Building</a>
-    </section>
-
-    <section class="featured-products">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="product-grid" id="featured-products">
-            <!-- Featured products will be loaded here -->
-        </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="products.html" class="btn btn-primary">View All Products</a>
-        </div>
-    </section>
-
-    <section class="compatibility-checker">
-        <div class="compatibility-card">
-            <h3>PC Part Compatibility Checker</h3>
-            <p>Not sure if components will work together? Use our compatibility tool to check before you buy.</p>
-            <a href="pc-builder.html" class="btn btn-primary">Check Compatibility</a>
-        </div>
-    </section>
-
-    <section class="deals" id="deals">
-        <h2 class="section-title">Hot Deals</h2>
-        <div class="deals-banner">
-            <h3>Flash Sale! Up to 30% off on Selected GPUs</h3>
-            <p>Limited time offer. Don't miss out!</p>
-            <div class="countdown" id="countdown">23:59:59</div>
-            <a href="gpus.html" class="btn btn-secondary">View Deals</a>
-        </div>
-    </section>
-
-    <section class="features">
-        <h2 class="section-title">Why Choose TechnoBuilders</h2>
-        <div class="features-container">
-            <div class="feature-box">
-                <div class="feature-icon">🔧</div>
-                <h3>Expert Tech Support</h3>
-                <p>Free consultation and support for your build</p>
+    <div class="cpu-info">
+        <div class="brands">
+            <div class="brand" id="amd-filter">
+                <div class="brand-logo amd-logo">AMD</div>
+                <div class="brand-name">AMD Processors</div>
             </div>
-            <div class="feature-box">
-                <div class="feature-icon">⚡</div>
-                <h3>Fast Shipping</h3>
-                <p>Next-day delivery available on most items</p>
+            <div class="brand" id="intel-filter">
+                <div class="brand-logo intel-logo">INTEL</div>
+                <div class="brand-name">Intel Processors</div>
             </div>
-            <div class="feature-box">
-                <div class="feature-icon">💰</div>
-                <h3>Price Match</h3>
-                <p>Found it cheaper? We'll match the price</p>
-            </div>
-            <div class="feature-box">
-                <div class="feature-icon">🔒</div>
-                <h3>Extended Warranty</h3>
-                <p>Peace of mind with our extended coverage</p>
+        </div>
+
+        <h2 class="section-title">All CPUs</h2>
+        <div class="product-grid" id="product-grid">
+        </div>
+    </div>
+
+    <section class="cpu-guide">
+        <div class="guide-container">
+            <h2 class="section-title">CPU Buying Guide</h2>
+            <div class="guide-content">
+                <h3>What to Look for in a CPU</h3>
+                <p>When shopping for a new processor, consider these key factors:</p>
+                <ul>
+                    <li><strong>Cores and Threads:</strong> More cores handle multitasking better, while more threads improve performance in multithreaded applications.</li>
+                    <li><strong>Clock Speed:</strong> Higher clock speeds (measured in GHz) generally mean better performance in single-threaded tasks.</li>
+                    <li><strong>Cache:</strong> More cache memory can improve performance for frequently accessed data.</li>
+                    <li><strong>TDP (Thermal Design Power):</strong> Lower TDP means less heat generation and power consumption.</li>
+                </ul>
+                <h3>AMD vs. Intel</h3>
+                <p>Both AMD and Intel offer excellent processors, but they have different strengths:</p>
+                <ul>
+                    <li><strong>AMD Ryzen:</strong> Generally offers more cores/threads for the price, great multitasking performance, and stronger integrated graphics.</li>
+                    <li><strong>Intel Core:</strong> Often delivers better single-core performance for gaming, and has strong compatibility with most applications.</li>
+                </ul>
+                <p>Need help choosing the right CPU for your build? Contact our tech support team for personalized recommendations!</p>
             </div>
         </div>
     </section>
@@ -486,7 +438,7 @@
             <div class="footer-col">
                 <h3>Components</h3>
                 <ul>
-                    <li><a href="cpus.html">CPUs</a></li>
+                    <li><a href="cpus.html" class="active">CPUs</a></li>
                     <li><a href="gpus.html">GPUs</a></li>
                     <li><a href="motherboards.html">Motherboards</a></li>
                     <li><a href="storage.html">Storage</a></li>
@@ -507,43 +459,63 @@
     </footer>
 
     <script>
-        // Products data
-        const products = [
+        const cpuProducts = [
             {
                 id: 1,
                 name: "AMD Ryzen 7 7800X3D",
                 price: 17024,
                 image: "/api/placeholder/400/320",
                 category: "cpu",
+                brand: "amd",
                 specs: "8-Core, 16-Thread, Up to 5.0GHz"
             },
             {
-                id: 3,
-                name: "NVIDIA RTX 4080 SUPER",
-                price: 55999.44,
+                id: 2,
+                name: "Intel Core i9-14900K",
+                price: 33039.44,
                 image: "/api/placeholder/400/320",
-                category: "gpu",
-                specs: "16GB GDDR6X, 10240 CUDA Cores"
+                category: "cpu",
+                brand: "intel",
+                specs: "24-Core (8P+16E), 32-Thread, Up to 6.0GHz"
             },
             {
-                id: 5,
-                name: "ASUS ROG Strix X670E-E Gaming",
-                price: 24079.44,
+                id: 11,
+                name: "AMD Ryzen 9 7950X",
+                price: 30799.44,
                 image: "/api/placeholder/400/320",
-                category: "motherboard",
-                specs: "AMD AM5, DDR5, PCIe 5.0, ATX"
+                category: "cpu",
+                brand: "amd",
+                specs: "16-Core, 32-Thread, Up to 5.7GHz"
             },
             {
-                id: 9,
-                name: "Samsung 990 PRO 2TB",
-                price: 11199.44,
+                id: 12,
+                name: "Intel Core i5-14600K",
+                price: 16799.44,
                 image: "/api/placeholder/400/320",
-                category: "storage",
-                specs: "M.2 NVMe SSD, PCIe 4.0, 7450MB/s Read"
+                category: "cpu",
+                brand: "intel",
+                specs: "14-Core (6P+8E), 20-Thread, Up to 5.3GHz"
+            },
+            {
+                id: 13,
+                name: "AMD Ryzen 5 7600X",
+                price: 12879.44,
+                image: "/api/placeholder/400/320",
+                category: "cpu",
+                brand: "amd",
+                specs: "6-Core, 12-Thread, Up to 5.3GHz"
+            },
+            {
+                id: 14,
+                name: "Intel Core i7-14700K",
+                price: 21559.44,
+                image: "/api/placeholder/400/320",
+                category: "cpu",
+                brand: "intel",
+                specs: "20-Core (8P+12E), 28-Thread, Up to 5.6GHz"
             }
         ];
 
-        // Cart data
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         function updateCartCount() {
@@ -551,12 +523,15 @@
             document.querySelector('.cart-count').textContent = totalItems;
         }
 
-        // Load featured products
-        function loadFeaturedProducts() {
-            const featuredContainer = document.getElementById('featured-products');
-            featuredContainer.innerHTML = '';
+        function displayProducts(brand = 'all') {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = '';
             
-            products.forEach(product => {
+            const filteredProducts = brand === 'all' 
+                ? cpuProducts 
+                : cpuProducts.filter(product => product.brand === brand);
+            
+            filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
@@ -570,10 +545,9 @@
                         <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
                     </div>
                 `;
-                featuredContainer.appendChild(productCard);
+                productGrid.appendChild(productCard);
             });
 
-            // Add event listeners to Add to Cart buttons
             const addToCartBtns = document.querySelectorAll('.add-to-cart');
             addToCartBtns.forEach(btn => {
                 btn.addEventListener('click', handleAddToCart);
@@ -582,7 +556,7 @@
 
         function handleAddToCart(e) {
             const productId = parseInt(e.target.dataset.id);
-            const product = products.find(p => p.id === productId);
+            const product = cpuProducts.find(p => p.id === productId);
             
             const existingItem = cart.find(item => item.id === productId);
             
@@ -599,39 +573,17 @@
             updateCartCount();
         }
 
-        function startCountdown() {
-            let hours = 23;
-            let minutes = 59;
-            let seconds = 59;
-            
-            const countdownInterval = setInterval(() => {
-                seconds--;
-                
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        
-                        if (hours < 0) {
-                            clearInterval(countdownInterval);
-                            document.getElementById('countdown').textContent = "Deal Ended";
-                            return;
-                        }
-                    }
-                }
-                
-                document.getElementById('countdown').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
+        document.getElementById('amd-filter').addEventListener('click', () => {
+            displayProducts('amd');
+        });
 
-        // Initialize
+        document.getElementById('intel-filter').addEventListener('click', () => {
+            displayProducts('intel');
+        });
+
         window.addEventListener('DOMContentLoaded', () => {
-            loadFeaturedProducts();
+            displayProducts();
             updateCartCount();
-            startCountdown();
         });
     </script>
 </body>

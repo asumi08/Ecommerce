@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechnoBuilders - Your PC Parts Destination</title>
+    <title>All Components - TechnoBuilders</title>
     <style>
         * {
             margin: 0;
@@ -87,122 +87,57 @@
             font-size: 0.75rem;
         }
 
-        .hero {
+        .page-header {
             background: linear-gradient(135deg, #121212 0%, #2d3436 100%);
             color: white;
-            padding: 4rem 5%;
+            padding: 3rem 5%;
             text-align: center;
         }
 
-        .hero h1 {
+        .page-header h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: #00aeff;
         }
 
-        .hero p {
+        .page-header p {
             font-size: 1.1rem;
             max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: #00aeff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0097e0;
-            transform: translateY(-2px);
-        }
-
-        .pc-builder-banner {
-            background-color: #00aeff;
-            color: white;
-            padding: 2rem 5%;
-            text-align: center;
             margin: 0 auto;
         }
 
-        .pc-builder-banner h2 {
-            margin-bottom: 1rem;
-        }
-
-        .btn-secondary {
-            background-color: white;
-            color: #00aeff;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f1f1f1;
-            transform: translateY(-2px);
+        .products {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2rem;
-            padding-top: 2rem;
         }
 
-        .features {
-            background-color: #f1f5f9;
-            padding: 4rem 5%;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-box {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #00aeff;
-            margin-bottom: 1rem;
-        }
-
-        .deals {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 5%;
-        }
-
-        .deals-banner {
-            background: linear-gradient(135deg, #00aeff 0%, #0076a3 100%);
-            border-radius: 8px;
-            padding: 2rem;
-            color: white;
-            text-align: center;
+        .category-filter {
+            display: flex;
+            justify-content: center;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .countdown {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 1rem 0;
+        .category-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
         }
 
-        .featured-products {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 5%;
+        .category-btn.active {
+            background-color: #00aeff;
+            color: white;
         }
 
         .product-grid {
@@ -276,6 +211,28 @@
             background-color: #0097e0;
         }
 
+        .category-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .category-link {
+            padding: 0.75rem 1.5rem;
+            background-color: #f1f5f9;
+            color: #333;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .category-link:hover {
+            background-color: #00aeff;
+            color: white;
+        }
+
         footer {
             background-color: #1a1a1a;
             color: white;
@@ -336,25 +293,6 @@
             border-top: 1px solid #333;
         }
 
-        .compatibility-checker {
-            margin: 3rem auto;
-            max-width: 1200px;
-            padding: 0 5%;
-        }
-
-        .compatibility-card {
-            background-color: #f8f9fa;
-            border: 2px solid #00aeff;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .compatibility-card h3 {
-            color: #00aeff;
-            margin-bottom: 1rem;
-        }
-
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -371,12 +309,14 @@
                 margin-left: 0;
             }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
-
             .product-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .category-filter {
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                justify-content: flex-start;
             }
         }
     </style>
@@ -386,8 +326,8 @@
         <nav class="navbar">
             <div class="logo">TechnoBuilders</div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="products.html">All Components</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" class="active">All Components</a></li>
                 <li><a href="pc-builder.html">PC Builder</a></li>
                 <li><a href="cart.html" class="cart-icon" id="cart-icon">
                     Cart <span class="cart-count">0</span>
@@ -396,69 +336,29 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>Build Your Dream PC</h1>
-        <p>High-quality components at competitive prices. From gaming beasts to productivity powerhouses, we've got you covered.</p>
-        <a href="products.html" class="btn btn-primary">Browse Components</a>
+    <section class="page-header">
+        <h1>PC Components</h1>
+        <p>Browse our wide selection of high-quality PC components for your custom build</p>
     </section>
 
-    <section class="pc-builder-banner">
-        <h2>Use Our PC Builder Tool</h2>
-        <p>Interactive component selection with real-time compatibility checking and performance metrics.</p>
-        <a href="pc-builder.html" class="btn btn-secondary">Start Building</a>
-    </section>
+    <div class="category-links">
+        <a href="cpus.html" class="category-link">CPUs</a>
+        <a href="gpus.html" class="category-link">GPUs</a>
+        <a href="motherboards.html" class="category-link">Motherboards</a>
+        <a href="storage.html" class="category-link">Storage</a>
+    </div>
 
-    <section class="featured-products">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="product-grid" id="featured-products">
-            <!-- Featured products will be loaded here -->
+    <section class="products">
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="cpu">CPUs</button>
+            <button class="category-btn" data-category="gpu">GPUs</button>
+            <button class="category-btn" data-category="motherboard">Motherboards</button>
+            <button class="category-btn" data-category="ram">RAM</button>
+            <button class="category-btn" data-category="storage">Storage</button>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="products.html" class="btn btn-primary">View All Products</a>
-        </div>
-    </section>
-
-    <section class="compatibility-checker">
-        <div class="compatibility-card">
-            <h3>PC Part Compatibility Checker</h3>
-            <p>Not sure if components will work together? Use our compatibility tool to check before you buy.</p>
-            <a href="pc-builder.html" class="btn btn-primary">Check Compatibility</a>
-        </div>
-    </section>
-
-    <section class="deals" id="deals">
-        <h2 class="section-title">Hot Deals</h2>
-        <div class="deals-banner">
-            <h3>Flash Sale! Up to 30% off on Selected GPUs</h3>
-            <p>Limited time offer. Don't miss out!</p>
-            <div class="countdown" id="countdown">23:59:59</div>
-            <a href="gpus.html" class="btn btn-secondary">View Deals</a>
-        </div>
-    </section>
-
-    <section class="features">
-        <h2 class="section-title">Why Choose TechnoBuilders</h2>
-        <div class="features-container">
-            <div class="feature-box">
-                <div class="feature-icon">🔧</div>
-                <h3>Expert Tech Support</h3>
-                <p>Free consultation and support for your build</p>
-            </div>
-            <div class="feature-box">
-                <div class="feature-icon">⚡</div>
-                <h3>Fast Shipping</h3>
-                <p>Next-day delivery available on most items</p>
-            </div>
-            <div class="feature-box">
-                <div class="feature-icon">💰</div>
-                <h3>Price Match</h3>
-                <p>Found it cheaper? We'll match the price</p>
-            </div>
-            <div class="feature-box">
-                <div class="feature-icon">🔒</div>
-                <h3>Extended Warranty</h3>
-                <p>Peace of mind with our extended coverage</p>
-            </div>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be loaded here -->
         </div>
     </section>
 
@@ -518,12 +418,28 @@
                 specs: "8-Core, 16-Thread, Up to 5.0GHz"
             },
             {
+                id: 2,
+                name: "Intel Core i9-14900K",
+                price: 33039.44,
+                image: "/api/placeholder/400/320",
+                category: "cpu",
+                specs: "24-Core (8P+16E), 32-Thread, Up to 6.0GHz"
+            },
+            {
                 id: 3,
                 name: "NVIDIA RTX 4080 SUPER",
                 price: 55999.44,
                 image: "/api/placeholder/400/320",
                 category: "gpu",
                 specs: "16GB GDDR6X, 10240 CUDA Cores"
+            },
+            {
+                id: 4,
+                name: "AMD Radeon RX 7900 XTX",
+                price: 53199.44,
+                image: "/api/placeholder/400/320",
+                category: "gpu",
+                specs: "24GB GDDR6, 12288 Stream Processors"
             },
             {
                 id: 5,
@@ -534,12 +450,44 @@
                 specs: "AMD AM5, DDR5, PCIe 5.0, ATX"
             },
             {
+                id: 6,
+                name: "MSI MPG Z790 EDGE WIFI",
+                price: 21279.44,
+                image: "/api/placeholder/400/320",
+                category: "motherboard",
+                specs: "Intel LGA 1700, DDR5, PCIe 5.0, ATX"
+            },
+            {
+                id: 7,
+                name: "G.SKILL Trident Z5 RGB 32GB",
+                price: 8959.44,
+                image: "/api/placeholder/400/320",
+                category: "ram",
+                specs: "DDR5-6000MHz, CL36, 2x16GB Kit"
+            },
+            {
+                id: 8,
+                name: "Corsair Vengeance RGB 64GB",
+                price: 12319.44,
+                image: "/api/placeholder/400/320",
+                category: "ram",
+                specs: "DDR5-5600MHz, CL40, 2x32GB Kit"
+            },
+            {
                 id: 9,
                 name: "Samsung 990 PRO 2TB",
                 price: 11199.44,
                 image: "/api/placeholder/400/320",
                 category: "storage",
                 specs: "M.2 NVMe SSD, PCIe 4.0, 7450MB/s Read"
+            },
+            {
+                id: 10,
+                name: "WD Black SN850X 1TB",
+                price: 7279.44,
+                image: "/api/placeholder/400/320",
+                category: "storage",
+                specs: "M.2 NVMe SSD, PCIe 4.0, 7300MB/s Read"
             }
         ];
 
@@ -551,12 +499,15 @@
             document.querySelector('.cart-count').textContent = totalItems;
         }
 
-        // Load featured products
-        function loadFeaturedProducts() {
-            const featuredContainer = document.getElementById('featured-products');
-            featuredContainer.innerHTML = '';
+        function displayProducts(category = 'all') {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = '';
             
-            products.forEach(product => {
+            const filteredProducts = category === 'all' 
+                ? products 
+                : products.filter(product => product.category === category);
+            
+            filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
@@ -570,7 +521,7 @@
                         <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
                     </div>
                 `;
-                featuredContainer.appendChild(productCard);
+                productGrid.appendChild(productCard);
             });
 
             // Add event listeners to Add to Cart buttons
@@ -599,39 +550,25 @@
             updateCartCount();
         }
 
-        function startCountdown() {
-            let hours = 23;
-            let minutes = 59;
-            let seconds = 59;
-            
-            const countdownInterval = setInterval(() => {
-                seconds--;
+        // Setup category filter buttons
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryBtns.forEach(b => b.classList.remove('active'));
                 
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        
-                        if (hours < 0) {
-                            clearInterval(countdownInterval);
-                            document.getElementById('countdown').textContent = "Deal Ended";
-                            return;
-                        }
-                    }
-                }
+                // Add active class to clicked button
+                btn.classList.add('active');
                 
-                document.getElementById('countdown').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
+                // Display products for selected category
+                displayProducts(btn.dataset.category);
+            });
+        });
 
         // Initialize
         window.addEventListener('DOMContentLoaded', () => {
-            loadFeaturedProducts();
+            displayProducts();
             updateCartCount();
-            startCountdown();
         });
     </script>
 </body>
