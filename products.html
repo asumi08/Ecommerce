@@ -319,6 +319,190 @@
                 justify-content: flex-start;
             }
         }
+        .cart-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .cart-modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 2rem;
+        max-width: 800px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cart-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-modal-title {
+        font-size: 1.5rem;
+        color: #00aeff;
+        margin: 0;
+    }
+
+    .close-cart-modal {
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .cart-modal-body {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    .cart-item {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr 1fr 0.5fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cart-item-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .cart-item-info h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    .cart-item-specs {
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .cart-item-price {
+        font-weight: 600;
+        color: #00aeff;
+    }
+
+    .cart-item-quantity {
+        display: flex;
+        align-items: center;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        background-color: #f1f5f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .quantity-input {
+        width: 40px;
+        height: 30px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+        margin: 0 0.5rem;
+    }
+
+    .cart-item-remove {
+        color: #ff5a5f;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    .cart-empty {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+    }
+
+    .cart-summary {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid #00aeff;
+    }
+
+    .cart-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .cart-modal-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 768px) {
+        .cart-item {
+            grid-template-columns: 1fr 1fr;
+            row-gap: 1rem;
+        }
+        
+        .cart-item-image {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        
+        .cart-item-info {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        
+        .cart-item-price {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        
+        .cart-item-quantity {
+            grid-column: 2;
+            grid-row: 2;
+        }
+        
+        .cart-item-remove {
+            grid-column: 2;
+            grid-row: 1;
+            justify-self: end;
+            align-self: start;
+        }
+    }
     </style>
 </head>
 <body>
@@ -358,7 +542,6 @@
             <button class="category-btn" data-category="storage">Storage</button>
         </div>
         <div class="product-grid" id="product-grid">
-            <!-- Products will be loaded here -->
         </div>
     </section>
 
@@ -405,9 +588,30 @@
             <p>&copy; 2025 TechnoBuilders. All rights reserved.</p>
         </div>
     </footer>
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3 class="cart-modal-title">Your Cart</h3>
+                <span class="close-cart-modal">&times;</span>
+            </div>
+            <div class="cart-modal-body">
+                <div class="cart-items" id="cart-items-container">
+                </div>
+                <div class="cart-summary">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span id="cart-total-price">₱0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-modal-footer">
+                <button class="btn" id="continue-shopping">Continue Shopping</button>
+                <button class="btn btn-primary" id="proceed-checkout">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Products data
         const products = [
             {
                 id: 1,
@@ -491,7 +695,6 @@
             }
         ];
 
-        // Cart data
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         function updateCartCount() {
@@ -524,7 +727,6 @@
                 productGrid.appendChild(productCard);
             });
 
-            // Add event listeners to Add to Cart buttons
             const addToCartBtns = document.querySelectorAll('.add-to-cart');
             addToCartBtns.forEach(btn => {
                 btn.addEventListener('click', handleAddToCart);
@@ -550,26 +752,173 @@
             updateCartCount();
         }
 
-        // Setup category filter buttons
         const categoryBtns = document.querySelectorAll('.category-btn');
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 categoryBtns.forEach(b => b.classList.remove('active'));
                 
-                // Add active class to clicked button
                 btn.classList.add('active');
                 
-                // Display products for selected category
                 displayProducts(btn.dataset.category);
             });
         });
 
-        // Initialize
         window.addEventListener('DOMContentLoaded', () => {
             displayProducts();
             updateCartCount();
         });
+        function initCartModal() {
+        const cartIcon = document.getElementById('cart-icon');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCartBtn = document.querySelector('.close-cart-modal');
+        const continueShoppingBtn = document.getElementById('continue-shopping');
+        const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+        
+        cartIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            openCartModal();
+        });
+        
+        closeCartBtn.addEventListener('click', function() {
+            cartModal.style.display = 'none';
+        });
+        
+        continueShoppingBtn.addEventListener('click', function() {
+            cartModal.style.display = 'none';
+        });
+        
+        proceedCheckoutBtn.addEventListener('click', function() {
+            alert('Proceeding to checkout...');
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+        });
+    }
+    
+    function openCartModal() {
+        const cartModal = document.getElementById('cart-modal');
+        loadCartItems();
+        cartModal.style.display = 'block';
+    }
+    
+    function loadCartItems() {
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+            document.getElementById('cart-total-price').textContent = '₱0.00';
+            return;
+        }
+        
+        let cartHTML = '';
+        let totalPrice = 0;
+        
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+            
+            cartHTML += `
+                <div class="cart-item" data-id="${item.id}">
+                    <div class="cart-item-image">
+                        <img src="/api/placeholder/80/80" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-specs">${item.specs || ''}</div>
+                    </div>
+                    <div class="cart-item-price">₱${item.price.toLocaleString('en-PH')}</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn decrease-quantity" data-id="${item.id}">-</button>
+                        <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99" data-id="${item.id}">
+                        <button class="quantity-btn increase-quantity" data-id="${item.id}">+</button>
+                    </div>
+                    <div class="cart-item-remove" data-id="${item.id}">×</div>
+                </div>
+            `;
+        });
+        
+        cartItemsContainer.innerHTML = cartHTML;
+        document.getElementById('cart-total-price').textContent = `₱${totalPrice.toLocaleString('en-PH')}`;
+        
+        addCartItemEventListeners();
+    }
+    
+    function addCartItemEventListeners() {
+        const decreaseButtons = document.querySelectorAll('.decrease-quantity');
+        decreaseButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = parseInt(this.dataset.id);
+                updateCartItemQuantity(id, 'decrease');
+            });
+        });
+        
+        const increaseButtons = document.querySelectorAll('.increase-quantity');
+        increaseButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = parseInt(this.dataset.id);
+                updateCartItemQuantity(id, 'increase');
+            });
+        });
+        
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const id = parseInt(this.dataset.id);
+                const newQuantity = parseInt(this.value);
+                if (newQuantity > 0) {
+                    updateCartItemQuantity(id, 'set', newQuantity);
+                } else {
+                    this.value = 1;
+                    updateCartItemQuantity(id, 'set', 1);
+                }
+            });
+        });
+        
+        const removeButtons = document.querySelectorAll('.cart-item-remove');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = parseInt(this.dataset.id);
+                removeCartItem(id);
+            });
+        });
+    }
+    
+    function updateCartItemQuantity(id, action, value = null) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const itemIndex = cart.findIndex(item => item.id === id);
+        
+        if (itemIndex !== -1) {
+            if (action === 'increase') {
+                cart[itemIndex].quantity += 1;
+            } else if (action === 'decrease') {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                }
+            } else if (action === 'set' && value !== null) {
+                cart[itemIndex].quantity = value;
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            loadCartItems();
+        }
+    }
+    
+    function removeCartItem(id) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        loadCartItems();
+    }
+    
+    window.addEventListener('DOMContentLoaded', () => {
+        initCartModal();
+    });
     </script>
 </body>
 </html>
