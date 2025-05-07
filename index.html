@@ -4,571 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnoBuilders - Your PC Parts Destination</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        header {
-            background-color: #1a1a1a;
-            color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00aeff;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 2rem;
-        }
-
-        .nav-links li a {
-            transition: color 0.3s;
-        }
-
-        .nav-links li a:hover {
-            color: #00aeff;
-        }
-
-        .active {
-            color: #00aeff;
-        }
-
-        .cart-icon {
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #ff5a5f;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.75rem;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #121212 0%, #2d3436 100%);
-            color: white;
-            padding: 4rem 5%;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00aeff;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: #00aeff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0097e0;
-            transform: translateY(-2px);
-        }
-
-        .pc-builder-banner {
-            background-color: #00aeff;
-            color: white;
-            padding: 2rem 5%;
-            text-align: center;
-            margin: 0 auto;
-        }
-
-        .pc-builder-banner h2 {
-            margin-bottom: 1rem;
-        }
-
-        .btn-secondary {
-            background-color: white;
-            color: #00aeff;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f1f1f1;
-            transform: translateY(-2px);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            padding-top: 2rem;
-        }
-
-        .features {
-            background-color: #f1f5f9;
-            padding: 4rem 5%;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-box {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #00aeff;
-            margin-bottom: 1rem;
-        }
-
-        .deals {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 5%;
-        }
-
-        .deals-banner {
-            background: linear-gradient(135deg, #00aeff 0%, #0076a3 100%);
-            border-radius: 8px;
-            padding: 2rem;
-            color: white;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .countdown {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 1rem 0;
-        }
-
-        .featured-products {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 5%;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 1rem;
-        }
-
-        .product-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .product-specs {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-price {
-            color: #00aeff;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #00aeff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background-color: #0097e0;
-        }
-
-        footer {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 3rem 5%;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-col h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            color: #00aeff;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-col ul li a:hover {
-            color: #00aeff;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-
-        .social-icon:hover {
-            background-color: #00aeff;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #333;
-        }
-
-        .compatibility-checker {
-            margin: 3rem auto;
-            max-width: 1200px;
-            padding: 0 5%;
-        }
-
-        .compatibility-card {
-            background-color: #f8f9fa;
-            border: 2px solid #00aeff;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .compatibility-card h3 {
-            color: #00aeff;
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 1rem;
-            }
-
-            .nav-links {
-                margin-top: 1rem;
-                width: 100%;
-                justify-content: space-around;
-            }
-
-            .nav-links li {
-                margin-left: 0;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-        }
-        .cart-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 1000;
-        overflow-y: auto;
-    }
-
-    .cart-modal-content {
-        background-color: white;
-        margin: 5% auto;
-        padding: 2rem;
-        max-width: 800px;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        max-height: 80vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .cart-modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #eee;
-    }
-
-    .cart-modal-title {
-        font-size: 1.5rem;
-        color: #00aeff;
-        margin: 0;
-    }
-
-    .close-cart-modal {
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-
-    .cart-modal-body {
-        flex-grow: 1;
-        overflow-y: auto;
-    }
-
-    .cart-item {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr 1fr 0.5fr;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .cart-item-image {
-        width: 80px;
-        height: 80px;
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .cart-item-image img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
-
-    .cart-item-info h4 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1rem;
-    }
-
-    .cart-item-specs {
-        font-size: 0.85rem;
-        color: #666;
-    }
-
-    .cart-item-price {
-        font-weight: 600;
-        color: #00aeff;
-    }
-
-    .cart-item-quantity {
-        display: flex;
-        align-items: center;
-    }
-
-    .quantity-btn {
-        width: 30px;
-        height: 30px;
-        background-color: #f1f5f9;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        cursor: pointer;
-        user-select: none;
-    }
-
-    .quantity-input {
-        width: 40px;
-        height: 30px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-        margin: 0 0.5rem;
-    }
-
-    .cart-item-remove {
-        color: #ff5a5f;
-        cursor: pointer;
-        font-size: 1.2rem;
-    }
-
-    .cart-empty {
-        text-align: center;
-        padding: 2rem;
-        color: #666;
-    }
-
-    .cart-summary {
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 2px solid #00aeff;
-    }
-
-    .cart-total {
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.2rem;
-        font-weight: 700;
-    }
-
-    .cart-modal-footer {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid #eee;
-    }
-
-    @media (max-width: 768px) {
-        .cart-item {
-            grid-template-columns: 1fr 1fr;
-            row-gap: 1rem;
-        }
-        
-        .cart-item-image {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        
-        .cart-item-info {
-            grid-column: 2;
-            grid-row: 1;
-        }
-        
-        .cart-item-price {
-            grid-column: 1;
-            grid-row: 2;
-        }
-        
-        .cart-item-quantity {
-            grid-column: 2;
-            grid-row: 2;
-        }
-        
-        .cart-item-remove {
-            grid-column: 2;
-            grid-row: 1;
-            justify-self: end;
-            align-self: start;
-        }
-    }
-    </style>
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo">TechnoBuilders</div>
+            <div class="logo-container">
+                <img src="assets/Head Logo.png" alt="TechnoBuilders Logo" id="logo">
+                <span class="logo-text">TechnoBuilders</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="products.html">All Components</a></li>
@@ -579,72 +23,72 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <section class="hero">
+            <h1>Build Your Dream PC</h1>
+            <p>High-quality components at competitive prices. From gaming beasts to productivity powerhouses, we've got you covered.</p>
+            <a href="products.html" class="btn btn-primary">Browse Components</a>
+        </section>
 
-    <section class="hero">
-        <h1>Build Your Dream PC</h1>
-        <p>High-quality components at competitive prices. From gaming beasts to productivity powerhouses, we've got you covered.</p>
-        <a href="products.html" class="btn btn-primary">Browse Components</a>
-    </section>
+        <section class="pc-builder-banner">
+            <h2>Use Our PC Builder Tool</h2>
+            <p>Interactive component selection with real-time compatibility checking and performance metrics.</p>
+            <a href="pc-builder.html" class="btn btn-secondary">Start Building</a>
+        </section>
 
-    <section class="pc-builder-banner">
-        <h2>Use Our PC Builder Tool</h2>
-        <p>Interactive component selection with real-time compatibility checking and performance metrics.</p>
-        <a href="pc-builder.html" class="btn btn-secondary">Start Building</a>
-    </section>
-
-    <section class="featured-products">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="product-grid" id="featured-products">
-        </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="products.html" class="btn btn-primary">View All Products</a>
-        </div>
-    </section>
-
-    <section class="compatibility-checker">
-        <div class="compatibility-card">
-            <h3>PC Part Compatibility Checker</h3>
-            <p>Not sure if components will work together? Use our compatibility tool to check before you buy.</p>
-            <a href="pc-builder.html" class="btn btn-primary">Check Compatibility</a>
-        </div>
-    </section>
-
-    <section class="deals" id="deals">
-        <h2 class="section-title">Hot Deals</h2>
-        <div class="deals-banner">
-            <h3>Flash Sale! Up to 30% off on Selected GPUs</h3>
-            <p>Limited time offer. Don't miss out!</p>
-            <div class="countdown" id="countdown">23:59:59</div>
-            <a href="gpus.html" class="btn btn-secondary">View Deals</a>
-        </div>
-    </section>
-
-    <section class="features">
-        <h2 class="section-title">Why Choose TechnoBuilders</h2>
-        <div class="features-container">
-            <div class="feature-box">
-                <div class="feature-icon">🔧</div>
-                <h3>Expert Tech Support</h3>
-                <p>Free consultation and support for your build</p>
+        <section class="featured-products">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid" id="featured-products">
             </div>
-            <div class="feature-box">
-                <div class="feature-icon">⚡</div>
-                <h3>Fast Shipping</h3>
-                <p>Next-day delivery available on most items</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="products.html" class="btn btn-primary">View All Products</a>
             </div>
-            <div class="feature-box">
-                <div class="feature-icon">💰</div>
-                <h3>Price Match</h3>
-                <p>Found it cheaper? We'll match the price</p>
-            </div>
-            <div class="feature-box">
-                <div class="feature-icon">🔒</div>
-                <h3>Extended Warranty</h3>
-                <p>Peace of mind with our extended coverage</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
+        <section class="compatibility-checker">
+            <div class="compatibility-card">
+                <h3>PC Part Compatibility Checker</h3>
+                <p>Not sure if components will work together? Use our compatibility tool to check before you buy.</p>
+                <a href="pc-builder.html" class="btn btn-primary">Check Compatibility</a>
+            </div>
+        </section>
+
+        <section class="deals" id="deals">
+            <h2 class="section-title">Hot Deals</h2>
+            <div class="deals-banner">
+                <h3>Flash Sale! Up to 30% off on Selected GPUs</h3>
+                <p>Limited time offer. Don't miss out!</p>
+                <div class="countdown" id="countdown">23:59:59</div>
+                <a href="gpus.html" class="btn btn-secondary">View Deals</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Why Choose TechnoBuilders</h2>
+            <div class="features-container">
+                <div class="feature-box">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Expert Tech Support</h3>
+                    <p>Free consultation and support for your build</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Shipping</h3>
+                    <p>Next-day delivery available on most items</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">💰</div>
+                    <h3>Price Match</h3>
+                    <p>Found it cheaper? We'll match the price</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Extended Warranty</h3>
+                    <p>Peace of mind with our extended coverage</p>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -685,18 +129,17 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 TechnoBuilders. All rights reserved.</p>
+            <p>© 2025 TechnoBuilders. All rights reserved.</p>
         </div>
     </footer>
     <div class="cart-modal" id="cart-modal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
                 <h3 class="cart-modal-title">Your Cart</h3>
-                <span class="close-cart-modal">&times;</span>
+                <span class="close-cart-modal">×</span>
             </div>
             <div class="cart-modal-body">
                 <div class="cart-items" id="cart-items-container">
-                    
                 </div>
                 <div class="cart-summary">
                     <div class="cart-total">
@@ -712,280 +155,6 @@
         </div>
     </div>
 
-    <script>
-        const products = [
-            {
-                id: 1,
-                name: "AMD Ryzen 7 7800X3D",
-                price: 17024,
-                image: "/api/placeholder/400/320",
-                category: "cpu",
-                specs: "8-Core, 16-Thread, Up to 5.0GHz"
-            },
-            {
-                id: 3,
-                name: "NVIDIA RTX 4080 SUPER",
-                price: 55999.44,
-                image: "/api/placeholder/400/320",
-                category: "gpu",
-                specs: "16GB GDDR6X, 10240 CUDA Cores"
-            },
-            {
-                id: 5,
-                name: "ASUS ROG Strix X670E-E Gaming",
-                price: 24079.44,
-                image: "/api/placeholder/400/320",
-                category: "motherboard",
-                specs: "AMD AM5, DDR5, PCIe 5.0, ATX"
-            },
-            {
-                id: 9,
-                name: "Samsung 990 PRO 2TB",
-                price: 11199.44,
-                image: "/api/placeholder/400/320",
-                category: "storage",
-                specs: "M.2 NVMe SSD, PCIe 4.0, 7450MB/s Read"
-            }
-        ];
-
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        
-        function updateCartCount() {
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            document.querySelector('.cart-count').textContent = totalItems;
-        }
-
-        function loadFeaturedProducts() {
-            const featuredContainer = document.getElementById('featured-products');
-            featuredContainer.innerHTML = '';
-            
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-specs">${product.specs}</p>
-                        <p class="product-price">₱${product.price.toLocaleString('en-PH')}</p>
-                        <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-                    </div>
-                `;
-                featuredContainer.appendChild(productCard);
-            });
-
-            const addToCartBtns = document.querySelectorAll('.add-to-cart');
-            addToCartBtns.forEach(btn => {
-                btn.addEventListener('click', handleAddToCart);
-            });
-        }
-
-        function handleAddToCart(e) {
-            const productId = parseInt(e.target.dataset.id);
-            const product = products.find(p => p.id === productId);
-            
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-        }
-
-        function startCountdown() {
-            let hours = 23;
-            let minutes = 59;
-            let seconds = 59;
-            
-            const countdownInterval = setInterval(() => {
-                seconds--;
-                
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        
-                        if (hours < 0) {
-                            clearInterval(countdownInterval);
-                            document.getElementById('countdown').textContent = "Deal Ended";
-                            return;
-                        }
-                    }
-                }
-                
-                document.getElementById('countdown').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            loadFeaturedProducts();
-            updateCartCount();
-            startCountdown();
-        });
-        function initCartModal() {
-        const cartIcon = document.getElementById('cart-icon');
-        const cartModal = document.getElementById('cart-modal');
-        const closeCartBtn = document.querySelector('.close-cart-modal');
-        const continueShoppingBtn = document.getElementById('continue-shopping');
-        const proceedCheckoutBtn = document.getElementById('proceed-checkout');
-        
-        cartIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            openCartModal();
-        });
-        
-        closeCartBtn.addEventListener('click', function() {
-            cartModal.style.display = 'none';
-        });
-        
-        continueShoppingBtn.addEventListener('click', function() {
-            cartModal.style.display = 'none';
-        });
-        
-        proceedCheckoutBtn.addEventListener('click', function() {
-            alert('Proceeding to checkout...');
-        });
-        
-        window.addEventListener('click', function(event) {
-            if (event.target === cartModal) {
-                cartModal.style.display = 'none';
-            }
-        });
-    }
-    
-    function openCartModal() {
-        const cartModal = document.getElementById('cart-modal');
-        loadCartItems();
-        cartModal.style.display = 'block';
-    }
-    
-    function loadCartItems() {
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
-            document.getElementById('cart-total-price').textContent = '₱0.00';
-            return;
-        }
-        
-        let cartHTML = '';
-        let totalPrice = 0;
-        
-        cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            totalPrice += itemTotal;
-            
-            cartHTML += `
-                <div class="cart-item" data-id="${item.id}">
-                    <div class="cart-item-image">
-                        <img src="/api/placeholder/80/80" alt="${item.name}">
-                    </div>
-                    <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                        <div class="cart-item-specs">${item.specs || ''}</div>
-                    </div>
-                    <div class="cart-item-price">₱${item.price.toLocaleString('en-PH')}</div>
-                    <div class="cart-item-quantity">
-                        <button class="quantity-btn decrease-quantity" data-id="${item.id}">-</button>
-                        <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99" data-id="${item.id}">
-                        <button class="quantity-btn increase-quantity" data-id="${item.id}">+</button>
-                    </div>
-                    <div class="cart-item-remove" data-id="${item.id}">×</div>
-                </div>
-            `;
-        });
-        
-        cartItemsContainer.innerHTML = cartHTML;
-        document.getElementById('cart-total-price').textContent = `₱${totalPrice.toLocaleString('en-PH')}`;
-        
-        addCartItemEventListeners();
-    }
-    
-    function addCartItemEventListeners() {
-        const decreaseButtons = document.querySelectorAll('.decrease-quantity');
-        decreaseButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                updateCartItemQuantity(id, 'decrease');
-            });
-        });
-        
-        const increaseButtons = document.querySelectorAll('.increase-quantity');
-        increaseButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                updateCartItemQuantity(id, 'increase');
-            });
-        });
-        
-        const quantityInputs = document.querySelectorAll('.quantity-input');
-        quantityInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                const id = parseInt(this.dataset.id);
-                const newQuantity = parseInt(this.value);
-                if (newQuantity > 0) {
-                    updateCartItemQuantity(id, 'set', newQuantity);
-                } else {
-                    this.value = 1;
-                    updateCartItemQuantity(id, 'set', 1);
-                }
-            });
-        });
-        
-        const removeButtons = document.querySelectorAll('.cart-item-remove');
-        removeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                removeCartItem(id);
-            });
-        });
-    }
-    
-    function updateCartItemQuantity(id, action, value = null) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const itemIndex = cart.findIndex(item => item.id === id);
-        
-        if (itemIndex !== -1) {
-            if (action === 'increase') {
-                cart[itemIndex].quantity += 1;
-            } else if (action === 'decrease') {
-                if (cart[itemIndex].quantity > 1) {
-                    cart[itemIndex].quantity -= 1;
-                }
-            } else if (action === 'set' && value !== null) {
-                cart[itemIndex].quantity = value;
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            loadCartItems();
-        }
-    }
-    
-    function removeCartItem(id) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart = cart.filter(item => item.id !== id);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        loadCartItems();
-    }
-    
-    window.addEventListener('DOMContentLoaded', () => {
-        initCartModal();
-    });
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
