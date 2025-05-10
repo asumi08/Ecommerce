@@ -469,8 +469,3 @@ footer {
     }
 }
 
-#logo {
-    width: 200px; /* Adjusted to fit the image's aspect ratio */
-    height: auto; /* Maintains aspect ratio */
-    margin-right: 10px;
-}
